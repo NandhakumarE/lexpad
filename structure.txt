@@ -1,0 +1,24 @@
+src/
+├── components/         # Shared UI components like IconButton, Dropdown, etc.
+│   ├── IconButton.tsx
+│   ├── IconDropdown.tsx
+│   └── ColorPicker.tsx
+│
+├── hooks/              # Reusable hooks
+│   └── useEditorFocus.ts
+│
+├── node/               # Lexical custom nodes
+│   └── CodeBlockNode.ts
+│
+├── plugin/             # Lexical plugins (custom ones you write)
+│   ├── HistoryPlugin.tsx
+│   └── LinkPlugin.tsx
+│
+├── toolbar/            # RichTextEditor toolbar components
+│   └── Toolbar.tsx
+│
+├── editor/             # 💡 Optional: group RichTextEditor here
+│   └── RichTextEditor.tsx
+│
+├── App.tsx             # Main entry
+└── main.tsx            # Vite entry point
