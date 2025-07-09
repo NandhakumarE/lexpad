@@ -11,7 +11,7 @@ const DEFAULT_MAX_VALUE = 72;
 const DEFAULT_INITIAL_VALUE = 12;
 
 
-const FontSizePlugin = () => {
+const FontSize = () => {
   const [inputSize, setInputSize] = useState<Size>(DEFAULT_INITIAL_VALUE);
   const [appliedSize, setAppliedSize] = useState<Size>(DEFAULT_INITIAL_VALUE);
 
@@ -90,4 +90,4 @@ const FontSizePlugin = () => {
   );
 };
 
-export default FontSizePlugin;
+export default FontSize;

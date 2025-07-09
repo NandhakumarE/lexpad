@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+import type { ColorResult } from "react-color";
 
 type RichTextValue = string;
 
@@ -13,4 +15,11 @@ export interface RichTextEditorProp{
   value: RichTextValue , 
   placeholder?: string,
   onChange: (value: RichTextValue) => void
+}
+
+export interface ColorPickerProps {
+  label: string,
+  baseIcon: ReactNode,
+  color: string,
+  onChange: (color: ColorResult) => void
 }

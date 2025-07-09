@@ -45,9 +45,7 @@ const Alignment = () => {
         if ($isRangeSelection(selection)) {
           const selectionNode = selection.getNodes()[0];
           const parent = selectionNode.getParent();
-          console.log(parent);
           const format = parent?.getFormatType() || "left";
-          console.log(format);
           setAlignment(getValidAlignmentType(format));
         }
       });
@@ -56,7 +54,6 @@ const Alignment = () => {
 
   const onSelect = (value: string) => {
     const type = getValidAlignmentType(value);
-    console.log(type);
     editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, type);
   };
 

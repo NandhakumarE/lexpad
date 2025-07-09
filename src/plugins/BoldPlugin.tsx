@@ -10,7 +10,9 @@ const BoldPlugin = () => {
      getTrackingMetric: (style) => style.fontWeight ? style.fontWeight : "",
      retrieveTrackedDataCallBack: (list = []) => {
         const isActive = (list.length === 1 && list[0] === 'bold');
-        setIsActive((prev) => isActive === prev ? prev : isActive);
+        setIsActive((prev) => {
+          return isActive === prev ? prev : isActive
+        });
      }
   })
 
@@ -21,7 +23,7 @@ const BoldPlugin = () => {
 
   return (
     <IconButton label="bold" onClick={onChange} active={isActive}>
-      <AiOutlineBold />
+      <AiOutlineBold data-testid="bold-icon" />
     </IconButton>
   );
 };

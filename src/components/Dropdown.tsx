@@ -75,6 +75,7 @@ const Dropdown = ({
             return (
               <li key={option.value} role="option" className="w-full">
                 <IconButton
+                  id={option.value}
                   label={option.label}
                   className="flex items-center gap-4 text-xs w-full"
                   onClick={() => handleOptionSelect(option.value)}

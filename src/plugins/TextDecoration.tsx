@@ -24,7 +24,6 @@ const getTextDecorationArray = (
 };
 
 const toggle = (array: string[] = [], value:string ): string[] => {
-    console.log(array, value);
     if(!value) return array;
     return array.includes(value) ? array.filter((v) => v !== value) : [...array, value];
 } 
@@ -64,7 +63,7 @@ const TextDecoration = () => {
         active={isUnderlineActive}
         onClick={() => onChange(TEXT_DECORATOR.UNDERLINE)}
       >
-        <AiOutlineUnderline />
+        <AiOutlineUnderline data-testid="underline-icon" />
       </IconButton>
       <IconButton
         id={TEXT_DECORATOR.STRIKE_THROUGH}
@@ -72,7 +71,7 @@ const TextDecoration = () => {
         active={isStrikeActive}
         onClick={() => onChange(TEXT_DECORATOR.STRIKE_THROUGH)}
       >
-        <AiOutlineStrikethrough />
+        <AiOutlineStrikethrough data-testid="strike-through-icon"/>
       </IconButton>
     </FlexContainer>
   );

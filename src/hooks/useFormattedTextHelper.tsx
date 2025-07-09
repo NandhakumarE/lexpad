@@ -62,7 +62,6 @@ const useFormattedTextHelper = (props: FormattedTextHelperProps) => {
               node.getTextContent(),
               stringifiedStyle
             );
-            console.log('ashfbasbf', newNode);
             node.replace(newNode);
           }
         }

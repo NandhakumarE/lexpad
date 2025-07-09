@@ -7,7 +7,7 @@ import useFormattedTextHelper from "../hooks/useFormattedTextHelper";
 
 const DEFAULT_COLOR = "#000";
 
-const TextColor = () => {
+const FontColor = () => {
   const [color, setColor] = useState<string>(DEFAULT_COLOR);
 
   const { updateStyle } = useFormattedTextHelper({
@@ -25,12 +25,12 @@ const TextColor = () => {
 
   return (
     <ColorPicker
-      label="text color"
-      baseIcon={<CgFormatColor color={color} />}
+      label="Font color"
+      baseIcon={<CgFormatColor color={color} data-testid="format-color-icon" />}
       color={color}
       onChange={onChange}
     />
   );
 };
 
-export default TextColor;
+export default FontColor;

@@ -1,15 +1,9 @@
-import { useRef, useState, type ReactNode, type RefObject } from 'react';
+import { useRef, useState, type RefObject } from 'react';
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { SketchPicker, type ColorResult } from 'react-color';
+import { SketchPicker } from 'react-color';
 import useOutsideClick from '../hooks/useOutsideClick';
 import IconButton from '../components/IconButton';
-
-interface ColorPickerProps {
-  label: string,
-  baseIcon: ReactNode,
-  color: string,
-  onChange: (color: ColorResult) => void
-}
+import type { ColorPickerProps } from '../types';
 
 const ColorPicker = (props: ColorPickerProps) => {
   const { label, baseIcon, color, onChange } = props;

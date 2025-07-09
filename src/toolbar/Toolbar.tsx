@@ -2,10 +2,10 @@ import FlexContainer from "../components/FlexContainer";
 import Separator from "../components/Separator";
 import BackgroundColor from "../plugins/BackgroundColor";
 import BoldPlugin from "../plugins/BoldPlugin";
-import FontSizePlugin from "../plugins/FontSizePlugin";
+import FontSize from "../plugins/FontSize";
 import ItalicsPlugin from "../plugins/ItalicsPlugin";
 import TextDecoration from "../plugins/TextDecoration";
-import TextColor from "../plugins/TextColor";
+import FontColor from "../plugins/FontColor";
 import Alignment from "../plugins/Alignment";
 
 const Toolbar = () => {
@@ -15,10 +15,10 @@ const Toolbar = () => {
       <ItalicsPlugin />
       <TextDecoration />
       <Separator />
-      <FontSizePlugin />
+      <FontSize />
       <Separator />
       <Alignment/>
-      <TextColor />
+      <FontColor />
       <BackgroundColor />
       <Separator />
     </FlexContainer>

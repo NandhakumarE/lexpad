@@ -35,6 +35,7 @@ const IconButton = (props: IconButtonProps) => {
   return (
     <button
       id={id}
+      data-testid={id}
       aria-label={label}
       title={label}
       onClick={onClick}
