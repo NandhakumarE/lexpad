@@ -6,7 +6,7 @@ import useOutsideClick from "../hooks/useOutsideClick";
 export interface DropdownOption {
   label: string;
   value: string;
-  icon: ReactNode;
+  icon?: ReactNode;
 }
 
 export type Position = "left" | "right";
@@ -24,6 +24,7 @@ export interface DropdownProps {
   selectedValue: string;
   options: DropdownOption[];
   baseIcon?: ReactNode;
+  className?: string;
   onSelect: (value: string) => void;
 }
 
@@ -39,6 +40,7 @@ const Dropdown = ({
     selectedValue,
     options,
     baseIcon,
+    className,
     onSelect,
   }: DropdownProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -59,7 +61,7 @@ const Dropdown = ({
     <div className="relative inline-block">
       <IconButton
         label={selectedOption?.label}
-        className="flex items-center gap-1"
+        className={`flex items-center gap-1 ${className}`}
         onClick={() => setIsMenuOpen((prev) => !prev)}
       >
         {baseIcon ? baseIcon : selectedOption.icon}
@@ -69,7 +71,7 @@ const Dropdown = ({
         <ul
         ref={optionListRef}
         role="listbox"
-          className={`absolute z-10 mt-1 p-1 border-black border-1 rounded-md shadow-lg max-h-[300px] bg-white list-none overflow-y-auto w-max min-w-full  flex ${ orientation==="vertical" ? 'flex-col' : 'flex-row'}  ${getPositionClass(position)}`}
+          className={`absolute z-10 mt-1 p-1 border-black border-1 rounded-md shadow-lg  bg-white list-none overflow-y-auto w-max min-w-full  flex ${ orientation==="vertical" ? 'flex-col' : 'flex-row'}  ${getPositionClass(position)}`}
         >
           {options.map((option) => {
             return (
@@ -77,7 +79,7 @@ const Dropdown = ({
                 <IconButton
                   id={option.value}
                   label={option.label}
-                  className="flex items-center gap-4 text-xs w-full"
+                  className={`flex items-center gap-4 text-xs w-full`}
                   onClick={() => handleOptionSelect(option.value)}
                 >
                     {type === 'icon-only' && option.icon}

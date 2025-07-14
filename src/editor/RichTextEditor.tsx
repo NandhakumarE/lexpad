@@ -6,9 +6,12 @@ import type { RichTextEditorProp } from "../types";
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
+import { TableRowNode } from '@lexical/table'
 import EditorChangePlugin from '../plugins/EditorChangePlugin';
 import { FormattedTextNode } from '../nodes/FormattedTextNode';
 import './editor.css';
+import { CustomTableNode, CustomTableCellNode } from '../nodes/Table';
+import TableFloatingMenu from '../plugins/TableFloatingMenu';
 
 const RichTextEditor = (props: RichTextEditorProp) => {
    const { name, placeholder,  value, onChange } = props;
@@ -16,7 +19,7 @@ const RichTextEditor = (props: RichTextEditorProp) => {
    const initialConfig: InitialConfigType = {
       namespace: name,
       onError: () => {},
-      nodes: [FormattedTextNode]
+      nodes: [FormattedTextNode, CustomTableNode, TableRowNode, CustomTableCellNode]
    }
 
    const getPlaceholder = () => {
@@ -40,6 +43,7 @@ const RichTextEditor = (props: RichTextEditorProp) => {
             </div>
         </div>
         <AutoFocusPlugin/>
+        <TableFloatingMenu />
         <EditorChangePlugin value={value} onChange={onChange}/>
     </LexicalComposer>
    )

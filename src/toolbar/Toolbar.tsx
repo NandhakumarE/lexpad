@@ -7,6 +7,7 @@ import ItalicsPlugin from "../plugins/ItalicsPlugin";
 import TextDecoration from "../plugins/TextDecoration";
 import FontColor from "../plugins/FontColor";
 import Alignment from "../plugins/Alignment";
+import Table from "../plugins/Table";
 
 const Toolbar = () => {
   return (
@@ -21,6 +22,7 @@ const Toolbar = () => {
       <FontColor />
       <BackgroundColor />
       <Separator />
+      <Table/>
     </FlexContainer>
   );
 };

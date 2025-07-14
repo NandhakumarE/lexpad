@@ -1,3 +1,24 @@
 .editor{
     font-size: 12px;
+    --table-row-striping-color: #edf6ff;
+    --table-header-background-color: #cfe0f3;
 }
+.editor table { 
+    border-radius: 4px; 
+    overflow: hidden; 
+    border: .5px solid var(--border-color);
+}
+.editor table td, th{
+    border: .5px solid var(--border-color);
+}
+.editor table th{
+   background-color: var(--table-header-background-color);
+}
+
+.row-striping tr:nth-child(odd) > td{
+    background-color: var(--table-row-striping-color) !important;
+}
+
+
+
+
