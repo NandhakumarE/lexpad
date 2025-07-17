@@ -22,7 +22,7 @@ const TableFloatingMenu = () => {
 
   const style = {
     left: `${activeCellRect.right - 20}px`,
-    top: `${activeCellRect.top + 16}px`,
+    top: `${activeCellRect.top }px`,
   };
 
   const getColorPicker = () => {
@@ -55,7 +55,7 @@ const TableFloatingMenu = () => {
               Cancel
             </button>
             <button
-              className="px-4 py-2 rounded-md bg-blue-500 text-white cursor-pointer"
+              className="px-4 py-2 rounded-md bg-black text-white cursor-pointer"
               onClick={onColorSelect}
             >
               Save
@@ -77,7 +77,7 @@ const TableFloatingMenu = () => {
   return (
     <>
       {getColorPicker()}
-      <div style={style} className="absolute">
+      <div style={style} className="absolute z-1">
         <Dropdown
           className="w-[16px] h-[16px] flex justify-center items-center text-[12px] !p-0 m-0 cursor-pointer"
           options={TABLE_COMMANDS_OPTIONS}

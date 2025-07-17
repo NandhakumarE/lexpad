@@ -49,12 +49,12 @@ export const TABLE_COMMANDS_OPTIONS = [
         value: TABLE_COMMANDS.ROW_STRIPING,
     },
     {
-        label: "Freeze First Column",
-        value: TABLE_COMMANDS.FREEZE_FIRST_COLUMN,
+        label: "Toggle First Row Freeze ",
+        value: TABLE_COMMANDS.FREEZE_FIRST_ROW,
     },
     {
-        label: "Freeze First Row",
-        value: TABLE_COMMANDS.FREEZE_FIRST_ROW,
+        label: "Toggle First Column Freeze ",
+        value: TABLE_COMMANDS.FREEZE_FIRST_COLUMN,
     },
     {
         label: "Insert Row Above",

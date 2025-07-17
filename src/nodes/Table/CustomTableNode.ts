@@ -66,7 +66,7 @@ export class CustomTableNode extends TableNode {
     const wrapper = document.createElement("div");
     wrapper.setAttribute(
       "style",
-      `max-width: 100%; width: fit-content; border-radius:4px; border:.5px solid ${this.__borderColor}; overflow:hidden; overflow-x: auto; margin: 0; padding: 0;`
+      `max-width: 100%; width: 100%; overflow:hidden; overflow-x: auto; margin: 0; padding: 0;`
     );
 
     const table = document.createElement("table");

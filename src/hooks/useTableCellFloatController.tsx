@@ -5,6 +5,7 @@ import {
   $setSelection,
   ElementNode,
 } from "lexical";
+import { TableRowNode } from "@lexical/table";
 import { useEffect, useState } from "react";
 import { TABLE_COMMANDS } from "../constants";
 import {
@@ -13,6 +14,7 @@ import {
   $getActiveCustomTableCell,
   $getActiveTableRow,
   $getActiveTable,
+  CustomTableCellNode,
 } from "../nodes/Table";
 
 type TableCommand = (typeof TABLE_COMMANDS)[keyof typeof TABLE_COMMANDS];
@@ -49,6 +51,12 @@ export const getColorLabelById = (
       return "";
   }
 };
+
+const $isFirstRowHeader = (currentRow: TableRowNode) => {
+   const firstCell = (currentRow.getChildren()?.[0]) as CustomTableCellNode;
+   if (!firstCell) return false;
+   return firstCell.__headerState === 1;
+}
 
 const useTableCellFloatingOption = () => {
   const [activeCell, setActiveCell] = useState<HTMLTableCellElement | null>(
@@ -113,7 +121,7 @@ const useTableCellFloatingOption = () => {
     setColorState((prev) => ({ ...prev, isPickerOpen: false }));
   };
 
-  const onRowStriping = () => {
+  const onToggleRowStriping = () => {
      editor.update(() => {
       const table = $getActiveTable(activeCell as HTMLElement);
       if (table) {
@@ -123,12 +131,33 @@ const useTableCellFloatingOption = () => {
     });
   };
 
+  const onToggleFirstRowFreeze = () => {
+     editor.update(() => {
+      const table = $getActiveTable(activeCell as HTMLElement);
+      if (table) {
+        const isFirstRowFreeze = table.getFreezeFirstRow();
+        table.setFreezeFirstRow(!isFirstRowFreeze);
+      }
+    });
+  };
+
+  const onToggleFirstColumnFreeze = () => {
+     editor.update(() => {
+      const table = $getActiveTable(activeCell as HTMLElement);
+      if (table) {
+        const isFirstColumnFreeze = table.getFreezeFirstColumn();
+        table.setFreezeFirstColumn(!isFirstColumnFreeze);
+      }
+    });
+  };
+
   const onRowUpdate = (type: TableCommand) => {
     editor.update(() => {
       const currentRow = $getActiveTableRow(activeCell as HTMLElement);
       if (currentRow) {
         const cellCount = (currentRow.getChildren() || []).length;
-        const newRow = $createRow(cellCount);
+        const isHeaderCell = $isFirstRowHeader(currentRow);
+        const newRow = $createRow(cellCount, isHeaderCell ? "first-cell-header" : 'none');
 
         if (type === TABLE_COMMANDS.INSERT_ROW_ABOVE) {
           currentRow.insertBefore(newRow);
@@ -154,14 +183,15 @@ const useTableCellFloatingOption = () => {
           table.getChildren().forEach((eachRow) => {
             const referenceNode = (eachRow as ElementNode).getChildren()?.[
               index
-            ];
+            ] as CustomTableCellNode;
+            const isHeaderCell = referenceNode.__headerState === 1
             if (!referenceNode) return;
             if (type === TABLE_COMMANDS.INSERT_COLUMN_LEFT) {
-              referenceNode.insertBefore($createCell());
+              referenceNode.insertBefore($createCell(isHeaderCell));
             } else if (type === TABLE_COMMANDS.DELETE_COLUMN) {
               referenceNode.remove();
             } else if (type === TABLE_COMMANDS.INSERT_COLUMN_RIGHT) {
-              referenceNode.insertAfter($createCell());
+              referenceNode.insertAfter($createCell(isHeaderCell));
             }
           });
         }
@@ -207,7 +237,13 @@ const useTableCellFloatingOption = () => {
         }));
         break;
       case TABLE_COMMANDS.ROW_STRIPING:
-        onRowStriping();
+        onToggleRowStriping();
+        break;
+      case TABLE_COMMANDS.FREEZE_FIRST_ROW:
+        onToggleFirstRowFreeze();
+        break;
+      case TABLE_COMMANDS.FREEZE_FIRST_COLUMN:
+        onToggleFirstColumnFreeze();
         break;
       case TABLE_COMMANDS.INSERT_ROW_ABOVE:
       case TABLE_COMMANDS.INSERT_ROW_BELOW:
