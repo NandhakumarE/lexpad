@@ -12,6 +12,9 @@ import { FormattedTextNode } from '../nodes/FormattedTextNode';
 import './editor.css';
 import { CustomTableNode, CustomTableCellNode } from '../nodes/Table';
 import TableFloatingMenu from '../plugins/TableFloatingMenu';
+import { LinkNode } from '@lexical/link';
+import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
+import LinkPopperPlugin from '../plugins/LinkPopperPlugin/LinkPopperPlugin';
 
 const RichTextEditor = (props: RichTextEditorProp) => {
    const { name, placeholder,  value, onChange } = props;
@@ -19,7 +22,7 @@ const RichTextEditor = (props: RichTextEditorProp) => {
    const initialConfig: InitialConfigType = {
       namespace: name,
       onError: () => {},
-      nodes: [FormattedTextNode, CustomTableNode, TableRowNode, CustomTableCellNode]
+      nodes: [FormattedTextNode, CustomTableNode, TableRowNode, CustomTableCellNode, LinkNode]
    }
 
    const getPlaceholder = () => {
@@ -34,17 +37,19 @@ const RichTextEditor = (props: RichTextEditorProp) => {
     <LexicalComposer initialConfig={initialConfig}>
         <div className='m-4 flex flex-col gap-2'>
             <Toolbar/>
-            <div className='relative max-h-[250px] overflow-y-auto border-1 rounded-2xl border-gray-400 editor'>
+            <div className='relative max-h-[450px] overflow-y-auto border-1 rounded-2xl border-gray-400 editor'>
                <RichTextPlugin
-                 contentEditable={<ContentEditable className='outline-none min-h-[150px] h-fit p-4' spellCheck={false}/>}
+                 contentEditable={<ContentEditable className='outline-none min-h-[450px] h-fit p-4' spellCheck={false}/>}
                  placeholder={getPlaceholder()}
                  ErrorBoundary={LexicalErrorBoundary}
                />
             </div>
         </div>
         <AutoFocusPlugin/>
+        <LinkPlugin/>
         <TableFloatingMenu />
         <EditorChangePlugin value={value} onChange={onChange}/>
+        <LinkPopperPlugin/>
     </LexicalComposer>
    )
 }

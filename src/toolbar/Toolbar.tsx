@@ -8,6 +8,7 @@ import TextDecoration from "../plugins/TextDecoration";
 import FontColor from "../plugins/FontColor";
 import Alignment from "../plugins/Alignment";
 import Table from "../plugins/Table";
+import LinkPlugin from "../plugins/LinkPlugin";
 
 const Toolbar = () => {
   return (
@@ -23,6 +24,7 @@ const Toolbar = () => {
       <BackgroundColor />
       <Separator />
       <Table/>
+      <LinkPlugin/>
     </FlexContainer>
   );
 };
