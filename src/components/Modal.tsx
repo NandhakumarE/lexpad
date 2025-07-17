@@ -31,7 +31,7 @@ const Modal = (props: ModalProps) => {
   const getHeader = () => {
     return (
       <div className="relative p-4 border-b-gray-300 bg-gray-100 h-[3.5rem]">
-        {header}
+        <h1 className="text-[18px]">{header}</h1>
         <button
           className="absolute top-3 right-3 z-1 cursor-pointer"
           onClick={onCloseModal}
