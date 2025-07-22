@@ -11,25 +11,31 @@
    background-color: var(--table-header-background-color);
 }
 
-.row-striping tr:nth-child(odd) > td{
+.editor .row-striping tr:nth-child(odd) > td{
     background-color: var(--table-row-striping-color) !important;
 }
 
-.freeze-first-column tr>td:first-child,
-.freeze-first-column tr>th:first-child {
+.editor .freeze-first-column tr>td:first-child,
+.editor .freeze-first-column tr>th:first-child {
     position: sticky;
     left: 0;
     border-right-width: 1.5px;
     z-index: 1;
 }
-.freeze-first-row tr:nth-of-type(1) > td,
-.freeze-first-row tr:nth-of-type(1) > th {
+.editor .freeze-first-row tr:nth-of-type(1) > td,
+.editor .freeze-first-row tr:nth-of-type(1) > th {
     position: sticky;
     top: 0;
     border-bottom-width: 1.5px;
     z-index: 1;
 }
 
-
-
+.editor a > span {
+    color: steelblue;
+    text-decoration: none;
+    cursor: pointer;
+}
+.editor a:hover > span {
+    text-decoration: underline;
+}
 

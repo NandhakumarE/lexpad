@@ -25,7 +25,7 @@ const useFormattedTextHelper = (props: FormattedTextHelperProps) => {
 
       editorState.read(() => {
         const selection = $getSelection();
-        if ($isRangeSelection(selection)) {
+        if (selection && $isRangeSelection(selection)) {
           const selectedNodes = selection.getNodes();
           for (const node of selectedNodes) {
             if ($isFormattedText(node)) {

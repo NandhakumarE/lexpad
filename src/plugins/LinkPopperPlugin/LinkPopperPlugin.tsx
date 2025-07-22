@@ -1,10 +1,11 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
-  $getNearestNodeFromDOMNode,
-  CLICK_COMMAND,
+  $getSelection,
+  $isRangeSelection,
+  type LexicalNode,
   type NodeKey,
 } from "lexical";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   useFloating,
   offset,
@@ -18,6 +19,7 @@ import FloatingLinkEditor from "./LinkPopperContent";
 
 const FloatingLinkEditorPlugin = () => {
   const [editor] = useLexicalComposerContext();
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [linkKey, setLinkKey] = useState<NodeKey | null>(null);
@@ -34,33 +36,38 @@ const FloatingLinkEditorPlugin = () => {
     setLinkUrl("");
   };
 
-  // Register click listener to detect link node
+  // Register update listener to detect link node
   useEffect(() => {
-    return editor.registerCommand(
-      CLICK_COMMAND,
-      (event) => {
-        const targetAnchor = (event.target as HTMLElement)?.closest("a");
-        if (!targetAnchor) {
-          handleClose();
-          return false;
-        }
+    return editor.registerUpdateListener(({ editorState }) => {
+      editorState.read(() => {
+        if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
 
-        event.preventDefault(); // Prevent browser navigation
+        debounceTimeout.current = setTimeout(() => {
+          editor.read(() => {
+            const selection = $getSelection();
+            if (!$isRangeSelection(selection)) return;
+            const anchorNode = selection.anchor.getNode();
 
-        const node = $getNearestNodeFromDOMNode(targetAnchor);
-        if (node && $isLinkNode(node)) {
-          console.log("Link node found:", node, node.getURL());
-          setAnchorEl(targetAnchor);
-          setLinkKey(node.getKey());
-          setLinkUrl(node.getURL() || "");
-          refs.setReference(targetAnchor);
-        }
-
-        return true;
-      },
-      0
-    );
-  }, [editor, refs]);
+            let currentNode: LexicalNode | null = anchorNode;
+            while (currentNode !== null && !$isLinkNode(currentNode)) {
+              currentNode = currentNode.getParent();
+            }
+            if ($isLinkNode(currentNode)) {
+              const element = editor.getElementByKey(currentNode.getKey());
+              if (element) {
+                setAnchorEl(element as HTMLElement);
+                setLinkKey(currentNode.getKey());
+                setLinkUrl(currentNode.getURL() || "");
+                refs.setReference(element as HTMLElement);
+              }
+            } else {
+              handleClose();
+            }
+          });
+        }, 400);
+      });
+    });
+  }, []);
 
   // Cleanup on outside click or node change
 

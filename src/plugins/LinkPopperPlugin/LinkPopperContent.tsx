@@ -4,7 +4,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import IconButton from "../../components/IconButton";
-import { $createTextNode, $getNodeByKey } from "lexical";
+import { $getNodeByKey } from "lexical";
 import { $isLinkNode } from "@lexical/link";
 interface LinkPopperContentProps {
   nodeKey: string;
@@ -27,8 +27,11 @@ const LinkPopperContent = (props: LinkPopperContentProps) => {
     editor.update(() => {
       const node = $getNodeByKey(nodeKey);
       if ($isLinkNode(node)) {
-        const child = $createTextNode(node.getTextContent());
-        node.replace(child);
+        const children = node.getChildren();
+        children.forEach((child) => {
+          node.insertBefore(child);
+        });
+        node.remove();
       }
     });
     onClose();
@@ -81,7 +84,7 @@ const LinkPopperContent = (props: LinkPopperContentProps) => {
 
   return (
     <>
-      <a className="w-[calc(100%-52px)] text-[12px]" href={url} target="_blank">
+      <a className="w-[calc(100%-52px)] text-[12px] min-w-[150px]" href={url} target="_blank">
         {url}
       </a>
       <IconButton label="Edit" onClick={onEditClick}>

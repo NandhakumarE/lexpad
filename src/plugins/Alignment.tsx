@@ -42,7 +42,7 @@ const Alignment = () => {
     return editor.registerUpdateListener(({ editorState }) => {
       editorState.read(() => {
         const selection = $getSelection();
-        if ($isRangeSelection(selection)) {
+        if (selection && $isRangeSelection(selection)) {
           const selectionNode = selection.getNodes()[0];
           const parent = selectionNode.getParent();
           const format = parent?.getFormatType() || "left";
