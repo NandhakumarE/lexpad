@@ -1,9 +1,9 @@
-import { IoIosLink } from "react-icons/io";
 import IconButton from "../components/IconButton";
 import { LinkNode } from "@lexical/link";
 import { $getSelection, $insertNodes, $isRangeSelection } from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { $createFormattedText } from "../nodes/FormattedTextNode";
+import { HiLink } from "react-icons/hi";
 
 const LinkPlugin = () => {
   const isActive = false; // Replace with actual logic to determine if the link is active
@@ -35,7 +35,7 @@ const LinkPlugin = () => {
 
   return (
     <IconButton label="Link" onClick={onChange} active={isActive}>
-      <IoIosLink data-testid="link-icon" />
+      <HiLink data-testid="link-icon" />
     </IconButton>
   );
 };
