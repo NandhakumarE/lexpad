@@ -1,4 +1,3 @@
-import FlexContainer from "../components/FlexContainer";
 import Separator from "../components/Separator";
 import BackgroundColor from "../plugins/BackgroundColor";
 import BoldPlugin from "../plugins/BoldPlugin";
@@ -16,7 +15,7 @@ import PageBreak from "../plugins/PageBreakPlugin";
 
 const Toolbar = () => {
   return (
-    <FlexContainer>
+    <>
       <BoldPlugin />
       <ItalicsPlugin />
       <TextDecoration />
@@ -34,7 +33,7 @@ const Toolbar = () => {
       <LinkPlugin/>
       <HorizontalLine/>
       <PageBreak/>
-    </FlexContainer>
+    </>
   );
 };
 
