@@ -79,6 +79,7 @@ const Dropdown = ({
                 <IconButton
                   id={option.value}
                   label={option.label}
+                  active={selectedValue === option.value}
                   className={`flex items-center gap-4 text-xs w-full`}
                   onClick={() => handleOptionSelect(option.value)}
                 >

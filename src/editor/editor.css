@@ -3,6 +3,10 @@
     --table-row-striping-color: #edf6ff;
     --table-header-background-color: #cfe0f3;
 }
+
+.editor *{
+       line-height: 1.5;
+}
 .editor table, table td, th { 
     border: .5px solid var(--border-color);
 }

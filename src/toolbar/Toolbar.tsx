@@ -10,6 +10,7 @@ import Alignment from "../plugins/Alignment";
 import Table from "../plugins/Table";
 import LinkPlugin from "../plugins/LinkPlugin";
 import ListPlugin from "../plugins/ListPlugin";
+import LineHeightPlugin from "../plugins/LineHeightPlugin";
 
 const Toolbar = () => {
   return (
@@ -27,6 +28,7 @@ const Toolbar = () => {
       <Table/>
       <LinkPlugin/>
       <ListPlugin/>
+      <LineHeightPlugin/>
     </FlexContainer>
   );
 };

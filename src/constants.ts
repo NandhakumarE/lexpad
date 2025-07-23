@@ -85,3 +85,13 @@ export const TABLE_COMMANDS_OPTIONS = [
         value: TABLE_COMMANDS.DELETE_TABLE,
     },
 ]
+
+export const DEFAULT_TEXT = "default";
+
+export const DEFAULT_LINE_HEIGHT = "1.5";
+export const LINE_HEIGHT_OPTIONS = [
+    {label: "Single", value: "1"},
+    {label: "1.15", value: "1.15"},
+    {label: "1.5", value: "1.5"},
+    {label: "Double", value: "2"},
+]

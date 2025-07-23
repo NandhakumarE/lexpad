@@ -20,7 +20,7 @@ const IconButton = (props: IconButtonProps) => {
   const { id, label, active, disabled, className, onClick, children } = props;
 
   const bgColor = active ? "bg-black" : "bg-white";
-  const textColor = active ? "text-white hover:text-black" : "text-black";
+  const textColor = active ? "text-white" : "text-black";
 
   const styledChild: ReactNode =
     isValidElement(children) && typeof children.type !== "string"
@@ -42,7 +42,7 @@ const IconButton = (props: IconButtonProps) => {
       disabled={disabled}
       role="option"
       aria-selected={active}
-      className={`p-2 rounded-md cursor-pointer hover:bg-gray-200 focus:outline-nonedisabled:opacity-35 disabled:cursor-default ${bgColor} ${className}`}
+      className={`p-2 rounded-md cursor-pointer  focus:outline-nonedisabled:opacity-35 disabled:cursor-default ${active ? "":"hover:bg-gray-200" } ${bgColor} ${textColor} ${className}`}
     >
       {styledChild}
     </button>
