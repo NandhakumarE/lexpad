@@ -21,14 +21,15 @@ const Toolbar = () => {
       <Separator />
       <FontSize />
       <Separator />
-      <Alignment/>
       <FontColor />
       <BackgroundColor />
       <Separator />
+      <Alignment/>
+      <LineHeightPlugin/>
+      <ListPlugin/>
+      <Separator />
       <Table/>
       <LinkPlugin/>
-      <ListPlugin/>
-      <LineHeightPlugin/>
     </FlexContainer>
   );
 };
