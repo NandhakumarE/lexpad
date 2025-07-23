@@ -17,6 +17,9 @@ import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import LinkPopperPlugin from '../plugins/LinkPopperPlugin/LinkPopperPlugin';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
+import { HorizontalRulePlugin } from '@lexical/react/LexicalHorizontalRulePlugin';
+import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
+import { PageBreakNode } from '../nodes/PageBreak/PageBreakNode';
 
 const RichTextEditor = (props: RichTextEditorProp) => {
    const { name, placeholder,  value, onChange } = props;
@@ -24,7 +27,7 @@ const RichTextEditor = (props: RichTextEditorProp) => {
    const initialConfig: InitialConfigType = {
       namespace: name,
       onError: () => {},
-      nodes: [FormattedTextNode, CustomTableNode, TableRowNode, CustomTableCellNode, LinkNode, ListNode, ListItemNode ]
+      nodes: [FormattedTextNode, CustomTableNode, TableRowNode, CustomTableCellNode, LinkNode, ListNode, ListItemNode, HorizontalRuleNode, PageBreakNode ]
    }
 
    const getPlaceholder = () => {
@@ -34,7 +37,6 @@ const RichTextEditor = (props: RichTextEditorProp) => {
 
       return null;
    }
-
    return (
     <LexicalComposer initialConfig={initialConfig}>
         <div className='m-4 flex flex-col gap-2'>
@@ -50,6 +52,7 @@ const RichTextEditor = (props: RichTextEditorProp) => {
         <AutoFocusPlugin/>
         <LinkPlugin/>
         <ListPlugin/>
+        <HorizontalRulePlugin/>
         <TableFloatingMenu />
         <EditorChangePlugin value={value} onChange={onChange}/>
         <LinkPopperPlugin/>

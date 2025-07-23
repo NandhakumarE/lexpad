@@ -11,6 +11,8 @@ import Table from "../plugins/Table";
 import LinkPlugin from "../plugins/LinkPlugin";
 import ListPlugin from "../plugins/ListPlugin";
 import LineHeightPlugin from "../plugins/LineHeightPlugin";
+import HorizontalLine from "../plugins/HorizontalLinePlugin";
+import PageBreak from "../plugins/PageBreakPlugin";
 
 const Toolbar = () => {
   return (
@@ -30,6 +32,8 @@ const Toolbar = () => {
       <Separator />
       <Table/>
       <LinkPlugin/>
+      <HorizontalLine/>
+      <PageBreak/>
     </FlexContainer>
   );
 };
