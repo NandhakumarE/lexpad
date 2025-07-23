@@ -13,8 +13,10 @@ import './editor.css';
 import { CustomTableNode, CustomTableCellNode } from '../nodes/Table';
 import TableFloatingMenu from '../plugins/TableFloatingMenu';
 import { LinkNode } from '@lexical/link';
+import { ListNode, ListItemNode } from "@lexical/list";
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import LinkPopperPlugin from '../plugins/LinkPopperPlugin/LinkPopperPlugin';
+import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 
 const RichTextEditor = (props: RichTextEditorProp) => {
    const { name, placeholder,  value, onChange } = props;
@@ -22,7 +24,7 @@ const RichTextEditor = (props: RichTextEditorProp) => {
    const initialConfig: InitialConfigType = {
       namespace: name,
       onError: () => {},
-      nodes: [FormattedTextNode, CustomTableNode, TableRowNode, CustomTableCellNode, LinkNode]
+      nodes: [FormattedTextNode, CustomTableNode, TableRowNode, CustomTableCellNode, LinkNode, ListNode, ListItemNode ]
    }
 
    const getPlaceholder = () => {
@@ -47,6 +49,7 @@ const RichTextEditor = (props: RichTextEditorProp) => {
         </div>
         <AutoFocusPlugin/>
         <LinkPlugin/>
+        <ListPlugin/>
         <TableFloatingMenu />
         <EditorChangePlugin value={value} onChange={onChange}/>
         <LinkPopperPlugin/>

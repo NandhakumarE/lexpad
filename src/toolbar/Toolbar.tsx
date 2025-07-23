@@ -9,6 +9,7 @@ import FontColor from "../plugins/FontColor";
 import Alignment from "../plugins/Alignment";
 import Table from "../plugins/Table";
 import LinkPlugin from "../plugins/LinkPlugin";
+import ListPlugin from "../plugins/ListPlugin";
 
 const Toolbar = () => {
   return (
@@ -25,6 +26,7 @@ const Toolbar = () => {
       <Separator />
       <Table/>
       <LinkPlugin/>
+      <ListPlugin/>
     </FlexContainer>
   );
 };
