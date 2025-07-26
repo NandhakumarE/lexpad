@@ -1,4 +1,5 @@
-# 📝 Lexpad – Lightweight, Pluggable Rich Text Editor for React
+![Lexpad](https://raw.githubusercontent.com/NandhakumarE/lexpad/main/public/lexical.png)
+## 📝 Lexpad – Lightweight, Pluggable Rich Text Editor for React
 
 **Lexpad** is a flexible, React-based rich text editor built on [Lexical](https://lexical.dev/). It’s designed to be lightweight, extensible, and ready for modern app integration — with a focus on clean UX, real-time HTML output, and developer-first ergonomics.
 
