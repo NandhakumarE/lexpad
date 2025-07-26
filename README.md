@@ -1,69 +1,109 @@
-# React + TypeScript + Vite
+# 📝 Lexpad – Lightweight, Pluggable Rich Text Editor for React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Lexpad** is a flexible, React-based rich text editor built on [Lexical](https://lexical.dev/). It’s designed to be lightweight, extensible, and ready for modern app integration — with a focus on clean UX, real-time HTML output, and developer-first ergonomics.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+| Feature | Description |
+|:-|:-|
+| 🧩 **React/TypeScript** | Modern, type-safe, easy to use |
+| 🧠 **Lexical-powered** | Extensible, reliable, accessible |
+| 🛠️ **Plugins** | Extend with your own plugins |
+| 📨 **HTML In/Out** | `value` / `onChange` for full HTML control |
+| 🧮 **Controlled/Uncontrolled** | Use as managed or unmanaged state |
+| 🎨 **Styling & Placeholder** | Custom classes, placeholder, and i18n support |
+| 🌐 **i18n-ready** | Pass your own language labels |
+| 🧰 **Imperative APIs** (soon) | Direct control over editor state |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+----
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Installation (Coming Soon)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install lexpad
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔧 Usage
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```tsx
+import { RichTextEditor } from "lexpad";
+
+function App() {
+  const [content, setContent] = useState("<p>Hello World!</p>");
+
+  return (
+    <RichTextEditor
+      name="about"
+      value={content}
+      placeholder="Write your story..."
+      onChange={setContent}
+      autoFocus
+    />
+  );
+}
 ```
+
+---
+
+## ✨ Props
+
+| Prop         | Type                     | Description                                |
+|--------------|--------------------------|--------------------------------------------|
+| `name`       | `string`                 | Unique field name, helpful for forms.      |
+| `value`      | `string` (HTML)          | Editor value (HTML content).               |
+| `onChange`   | `(html: string) => void` | Callback on content change.                |
+| `placeholder`| `string`                 | Placeholder text when empty.               |
+| `autoFocus`  | `boolean`                | Autofocus on mount (optional).             |
+| `readOnly`   | `boolean`                | Makes editor read-only (optional).         |
+| `className`  | `string`                 | Wrapper class (optional).                  |
+| `editorClassName` | `string`           | Editor content class (optional).           |
+| `i18n`       | `Record<string, string>` | Custom language labels.                    |
+| `debounce`   | `number` (ms)            | Debounce delay for `onChange` (optional).  |
+
+---
+
+## 🌍 i18n Example
+
+```tsx
+<RichTextEditor
+  name="intro"
+  i18n={{
+    bold: "Gras",
+    italic: "Italique",
+    heading: "Titre",
+    placeholder: "Écrivez quelque chose..."
+  }}
+/>
+```
+
+---
+
+## 📈 Roadmap
+
+- [x] HTML value in/out
+- [x] Controlled & uncontrolled support
+- [x] i18n via props
+- [ ] Built-in formatting toolbar
+- [ ] Plugin API
+- [ ] Image embed plugin
+- [ ] Markdown input/output (optional)
+- [ ] Publish on npm
+
+---
+
+## 🧑‍💻 Contributing
+
+Have a plugin or a feature in mind? Feel free to open a discussion or PR!
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
+Made with ❤️ by [@NandhakumarE](https://github.com/NandhakumarE)
