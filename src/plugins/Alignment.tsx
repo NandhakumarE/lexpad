@@ -15,16 +15,14 @@ import {
 } from "lexical";
 
 type AlignmentType = "left" | "center" | "right" | "justify";
+
 const options: DropdownOption[] = [
   { label: "Left", value: "left", icon: <AiOutlineAlignLeft size={14} /> },
-  {
-    label: "Center",
-    value: "center",
-    icon: <AiOutlineAlignCenter size={14} />,
-  },
+  { label: "Center", value: "center", icon: <AiOutlineAlignCenter size={14} /> },
   { label: "Right", value: "right", icon: <AiOutlineAlignRight size={14} /> },
   { label: "Justify", value: "justify", icon: <LuAlignJustify size={14} /> },
 ];
+
 const isValidAlignmentType = (val: string): val is AlignmentType => {
   return options.some((option) => option.value === val);
 };
@@ -50,7 +48,7 @@ const Alignment = () => {
         }
       });
     });
-  },[editor]);
+  }, [editor]);
 
   const onSelect = (value: string) => {
     const type = getValidAlignmentType(value);
