@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react';
-import { $getSelection, FORMAT_ELEMENT_COMMAND, type LexicalEditor } from "lexical";
+import React from "react";
+import {
+  $getSelection,
+  $isRangeSelection,
+  FORMAT_ELEMENT_COMMAND,
+  type LexicalEditor,
+} from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { it, describe, vi, beforeEach, expect } from "vitest";
-import { screen, render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom'
-import Alignment from '../../src/plugins/Alignment';
+import { screen, render, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import Alignment from "../../src/plugins/Alignment";
 
 /*
   mock: 
@@ -57,7 +62,9 @@ describe("Alignment", () => {
   const mockRead = vi.fn((cb) => cb());
   const mockDispatchCommand = vi.fn();
   let editor: LexicalEditor;
-  const mockNode = { getParent: vi.fn(() => ({ getFormatType: () => "left" })) };
+  const mockNode = {
+    getParent: vi.fn(() => ({ getFormatType: () => "left" })),
+  };
 
   beforeEach(() => {
     editor = {
@@ -68,7 +75,9 @@ describe("Alignment", () => {
       dispatchCommand: mockDispatchCommand,
     } as unknown as LexicalEditor;
 
-    const mockSelection = { getNodes: () => [mockNode] } as unknown as ReturnType<typeof $getSelection>;
+    const mockSelection = {
+      getNodes: () => [mockNode],
+    } as unknown as ReturnType<typeof $getSelection>;
 
     vi.mocked(useLexicalComposerContext).mockReturnValue([
       editor,
@@ -78,30 +87,52 @@ describe("Alignment", () => {
   });
 
   it("should render dropdown with first option as selected value", () => {
-    render(<Alignment/>);
-    const alignmentDropdown = screen.getByTestId('alignment');
+    render(<Alignment />);
+    const alignmentDropdown = screen.getByTestId("alignment");
     expect(alignmentDropdown).toBeInTheDocument();
     expect(screen.getByTestId("selected-value").textContent).toMatch(/left/);
   });
 
   it("should dispatch right alignment when Right option is clicked", () => {
-  render(<Alignment />);
-  const alignRightBtn = screen.getByTestId("option-right");
-  fireEvent.click(alignRightBtn);
-  expect(mockDispatchCommand).toHaveBeenCalledWith(FORMAT_ELEMENT_COMMAND, "right");
-});
+    render(<Alignment />);
+    const alignRightBtn = screen.getByTestId("option-right");
+    fireEvent.click(alignRightBtn);
+    expect(mockDispatchCommand).toHaveBeenCalledWith(
+      FORMAT_ELEMENT_COMMAND,
+      "right"
+    );
+  });
 
-it("should dispatch center alignment when Center option is clicked", () => {
-  render(<Alignment />);
-  const alignCenterBtn = screen.getByTestId("option-center");
-  fireEvent.click(alignCenterBtn);
-  expect(mockDispatchCommand).toHaveBeenCalledWith(FORMAT_ELEMENT_COMMAND, "center");
-});
+  it("should dispatch center alignment when Center option is clicked", () => {
+    render(<Alignment />);
+    const alignCenterBtn = screen.getByTestId("option-center");
+    fireEvent.click(alignCenterBtn);
+    expect(mockDispatchCommand).toHaveBeenCalledWith(
+      FORMAT_ELEMENT_COMMAND,
+      "center"
+    );
+  });
 
-it("should dispatch justify alignment when Justify option is clicked", () => {
-  render(<Alignment />);
-  const alignJustifyBtn = screen.getByTestId("option-justify");
-  fireEvent.click(alignJustifyBtn);
-  expect(mockDispatchCommand).toHaveBeenCalledWith(FORMAT_ELEMENT_COMMAND, "justify");
-});
+  it("should dispatch justify alignment when Justify option is clicked", () => {
+    render(<Alignment />);
+    const alignJustifyBtn = screen.getByTestId("option-justify");
+    fireEvent.click(alignJustifyBtn);
+    expect(mockDispatchCommand).toHaveBeenCalledWith(
+      FORMAT_ELEMENT_COMMAND,
+      "justify"
+    );
+  });
+  it("should reflect alignment retrieved from editor state", () => {
+    const parentMock = { getFormatType: vi.fn(() => "center") };
+    const mockNode = { getParent: vi.fn(() => parentMock) };
+
+    vi.mocked($getSelection).mockReturnValue({
+      getNodes: () => [mockNode]
+    } as any)
+    
+     vi.mocked($isRangeSelection).mockReturnValue(true);
+
+     render(<Alignment/>);
+     expect(screen.getByTestId('alignment')).toHaveTextContent(/center/)
+  })
 });
