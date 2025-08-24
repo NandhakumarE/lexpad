@@ -5,11 +5,11 @@ interface ModalProps {
   header: React.ReactNode;
   footer: React.ReactNode;
   children: React.ReactNode;
-  modalSize: "small" | "medium" | "large";
+  modalSize?: "small" | "medium" | "large";
   onClose: () => void;
 }
 
-const getModalSizeClasses = (size: "small" | "medium" | "large") => {
+const getModalSizeClasses = (size: "small" | "medium" | "large" | undefined) => {
   switch (size) {
     case "small":
       return "max-w-[80%] sm:max-w-[50%] md:max-w-[40%]";
@@ -30,9 +30,10 @@ const Modal = (props: ModalProps) => {
 
   const getHeader = () => {
     return (
-      <div className="relative p-4 border-b-gray-300 bg-gray-100 h-[3.5rem]">
+      <div data-testid="modal-header" className="relative p-4 border-b-gray-300 bg-gray-100 h-[3.5rem]">
         <h1 className="text-[18px]">{header}</h1>
         <button
+          data-testid="modal-close-btn"
           className="absolute top-3 right-3 z-1 cursor-pointer"
           onClick={onCloseModal}
         >
@@ -44,7 +45,7 @@ const Modal = (props: ModalProps) => {
 
   const getContent = () => {
     return (
-      <div className="p-4 bg-white h-fit overflow-hidden overflow-y-auto">
+      <div data-testid="modal-content" className="p-4 bg-white h-fit overflow-hidden overflow-y-auto">
         {children}
       </div>
     );
@@ -52,7 +53,7 @@ const Modal = (props: ModalProps) => {
 
   const getFooter = () => {
     return (
-      <div className="px-4 border-t-1 border-gray-300 bg-white h-[4rem]">
+      <div data-testid="modal-footer" className="px-4 border-t-1 border-gray-300 bg-white h-[4rem]">
         {footer}
       </div>
     );
@@ -61,6 +62,7 @@ const Modal = (props: ModalProps) => {
   const modal = (
     <div className="fixed inset-0 z-1  w-full bg-[rgba(0,0,0,.5)] flex items-center justify-center">
       <div
+        data-testid="modal-base-container"
         className={`${getModalSizeClasses(
           modalSize
         )} w-full  overflow-hidden bg-white rounded-2xl`}
