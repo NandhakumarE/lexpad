@@ -28,6 +28,7 @@ export interface RichTextEditorProp{
 }
 
 export interface ColorPickerProps {
+  id?: string,
   label: string,
   baseIcon: ReactNode,
   color: string,

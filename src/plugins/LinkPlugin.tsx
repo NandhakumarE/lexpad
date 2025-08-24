@@ -34,7 +34,7 @@ const LinkPlugin = () => {
   };
 
   return (
-    <IconButton label="Link" onClick={onChange} active={isActive}>
+    <IconButton id="link-plugin" label="Link" onClick={onChange} active={isActive}>
       <HiLink data-testid="link-icon" />
     </IconButton>
   );

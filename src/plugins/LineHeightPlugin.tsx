@@ -21,6 +21,7 @@ const LineHeightPlugin = () => {
 
   return (
     <Dropdown
+      id="line-height-plugin"
       type="value-only"
       orientation="vertical"
       position="right"

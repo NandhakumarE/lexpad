@@ -22,7 +22,7 @@ const BoldPlugin = () => {
   }
 
   return (
-    <IconButton label="bold" onClick={onChange} active={isActive}>
+    <IconButton id="bold-plugin" label="bold" onClick={onChange} active={isActive}>
       <AiOutlineBold data-testid="bold-icon" />
     </IconButton>
   );

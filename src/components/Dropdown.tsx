@@ -18,6 +18,7 @@ export type DropdownDisplayType = "icon-only" | "value-only";
 export type DropdownOrientation = "horizontal" | "vertical";
 
 export interface DropdownProps {
+  id?: string,
   type: DropdownDisplayType;
   orientation: DropdownOrientation;
   position?: Position;
@@ -34,6 +35,7 @@ const getPositionClass = (position: Position) => {
 };
 
 const Dropdown = ({
+    id,
     type,
     orientation,
     position = 'left',
@@ -60,6 +62,7 @@ const Dropdown = ({
   return (
     <div className="relative inline-block">
       <IconButton
+        id={id}
         label={selectedOption?.label}
         className={`flex items-center gap-1 ${className}`}
         onClick={() => setIsMenuOpen((prev) => !prev)}

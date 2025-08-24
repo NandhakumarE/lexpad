@@ -57,6 +57,7 @@ const Alignment = () => {
 
   return (
     <Dropdown
+      id="alignment-plugin"
       type="icon-only"
       orientation="horizontal"
       options={options}

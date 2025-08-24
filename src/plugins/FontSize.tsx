@@ -58,7 +58,7 @@ const FontSize = () => {
   };
 
   return (
-    <div className="flex items-center gap-1">
+    <div data-testid="font-size-plugin" className="flex items-center gap-1">
       <IconButton
         label="Decrease font size"
         disabled={appliedSize === undefined || appliedSize <= 1}

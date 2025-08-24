@@ -20,7 +20,7 @@ const ItalicsPlugin = () => {
   }
 
   return (
-    <IconButton label="italic" onClick={onChange} active={isActive}>
+    <IconButton id="italic-plugin" label="italic" onClick={onChange} active={isActive}>
       <AiOutlineItalic data-testid="italic-icon"/>
     </IconButton>
   );

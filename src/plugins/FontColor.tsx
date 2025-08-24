@@ -25,6 +25,7 @@ const FontColor = () => {
 
   return (
     <ColorPicker
+      id="font-color-plugin"
       label="Font color"
       baseIcon={<CgFormatColor color={color} data-testid="format-color-icon" />}
       color={color}

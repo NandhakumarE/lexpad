@@ -6,7 +6,7 @@ import IconButton from '../components/IconButton';
 import type { ColorPickerProps } from '../types';
 
 const ColorPicker = (props: ColorPickerProps) => {
-  const { label, baseIcon, color, onChange } = props;
+  const { id, label, baseIcon, color, onChange } = props;
   const [ isMenuOpen, setIsMenuOpen] = useState(false);
   const pickerRef = useRef<HTMLDivElement>(null);
 
@@ -15,6 +15,7 @@ const ColorPicker = (props: ColorPickerProps) => {
   return (
   <div className='relative'>
       <IconButton
+        id={id}
         label={label}
         className="flex items-center gap-1"
         onClick={() => setIsMenuOpen((prev) => !prev)}

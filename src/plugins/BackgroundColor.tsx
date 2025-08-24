@@ -25,6 +25,7 @@ const BackgroundColor = () => {
 
   return (
     <ColorPicker
+      id="background-color-plugin"
       label="Background color"
       baseIcon={<CgColorBucket color={color} data-testid="bg-color-icon" />}
       color={color}
