@@ -93,6 +93,29 @@ describe("FormattedTextNode", () => {
     expect($isFormattedText(node)).toBe(true);
     expect($isFormattedText({})).toBe(false);
   });
+  it("should import dom correctly", () => {
+     const spanDom = document.createElement('span');
+     // without style and text
+     let importSpan = FormattedTextNode.importDOM()?.['span']; 
+     expect(importSpan).toBeDefined();
+
+     expect(importSpan?.(spanDom)).toBeNull();
+
+     // with style and text
+     spanDom.setAttribute("style", SAMPLE_STYLE);
+     spanDom.textContent = SAMPLE_TEXT;
+
+     importSpan = FormattedTextNode.importDOM()?.['span']; 
+     expect(importSpan).toBeDefined();
+
+     const result = importSpan?.(spanDom);
+
+     expect(result).not.toBeNull();
+     expect(result?.priority).toBe(0);
+
+     const conversionResult = result?.conversion(spanDom);
+     expect(conversionResult).toHaveProperty("node")
+  })
 });
 
 describe("Utils(FormattedText)", () => {

@@ -3,7 +3,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { $getSelection, $isRangeSelection, type LexicalEditor } from "lexical";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
-import { $isFormattedText } from "../../src/nodes/FormattedTextNode";
+import { $createFormattedText, $isFormattedText } from "../../src/nodes/FormattedTextNode";
 import useFormattedTextHelper from "../../src/hooks/useFormattedTextHelper";
 
 vi.mock("@lexical/react/LexicalComposerContext", () => ({
@@ -24,6 +24,7 @@ vi.mock("../../src/nodes/FormattedTextNode", async (originalModule) => {
 
   return {
     ...(original as any),
+    $createFormattedText: vi.fn(),
     $isFormattedText: vi.fn(),
   };
 });
@@ -96,4 +97,25 @@ describe("useFormattedTextHelper", () => {
       "font-weight:bold;color:steelblue"
     );
   });
+  it("should update the style even the extracted node is not Formatted Text Node", () => {
+
+    vi.mocked($isRangeSelection).mockReturnValue(true);
+    vi.mocked($isFormattedText).mockReturnValue(false);
+
+    const fakeFormattedNode = { type: "FormattedTextNode", style: "color:steelblue" };
+
+    vi.mocked($createFormattedText).mockReturnValue(fakeFormattedNode as any)
+
+
+    const retrieveTrackedDataCallBack = vi.fn();
+    const getTrackingMetric = vi.fn();
+
+    const { result } = renderHook(() => useFormattedTextHelper({
+       retrieveTrackedDataCallBack,
+       getTrackingMetric,
+    }));
+
+    result.current.updateStyle(({ color: "steelblue" }))
+    expect(retrieveTrackedDataCallBack).toHaveBeenCalledWith(['default']);
+  })
 });
